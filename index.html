@@ -1,250 +1,351 @@
 
-<html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar"> 
 <head>
+  <meta property="og:image" content="https://i.imgur.com/RF0p0LF.png">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.imgur.com/RF0p0LF.png">
+  
+  <meta name="keywords" content="تطبيقات, تحميل تطبيقات, اندرويد, ايفون, رابط مباشر, تطبيق مجاني, متجر تطبيقات, APK, تطبيقات مهكرة, برامج موبايل">
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> محمد علي للاتصالات</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title> تطبيقات محمد علي للإتصالات </title>
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
-    body, html {
-      height: 100%;
-      background-color: #f9f9f9;
-      font-family: sans-serif;
-    }
-
-    .marquee-container {
-      background-color: #007BFF;
-      color: white;
-      padding: 1px 0;
-      overflow: hidden;
-      position: relative;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-    }
-
-    .marquee-text {
-      display: inline-block;
-      white-space: nowrap;
-      padding-left: 100%;
-      animation: scroll-right 20s linear infinite;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    @keyframes scroll-right {
-      0%   { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
-
-    .loader-wrapper {
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-color: #f9f9f9;
+    body {
+      min-height: 100vh;
+      background: linear-gradient(to bottom right, #2c3e50, #3498db);
+      font-family: 'Cairo', sans-serif;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      z-index: 9999;
+      color: white;
+      text-align: center;
+      padding: 20px;
     }
 
-    .loader {
-      border: 10px solid #f3f3f3;
-      border-top: 10px solid crimson;
+    .circle-image {
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
-      width: 80px;
-      height: 80px;
-      animation: spin 1s linear infinite;
+      object-fit: cover;
+      border: 5px solid white;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+      margin-top: 40px;
+      animation: slideFadeDown 1.5s ease forwards;
+      opacity: 0;
+      transform: translateY(-50px);
     }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    @media (max-width: 600px) {
-      .loader {
-        width: 60px;
-        height: 60px;
-        border-width: 8px;
+    @keyframes slideFadeDown {
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
-    #main-content {
-      display: none;
-      padding: 20px;
-      text-align: center;
+    h1 {
+      margin-top: 20px;
+      font-size: 24px;
     }
 
-    .top-image {
-      display: block;
-      margin: 30px auto 20px;
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 0 8px rgba(0,0,0,0.2);
-    }
-
-    .download-section {
+    .download-buttons {
+      margin: 30px 0;
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      margin-top: 30px;
+      gap: 15px;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .download-buttons a {
+      display: block;
+      padding: 14px 20px;
+      background: linear-gradient(45deg, #1abc9c, #16a085);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 18px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
+    }
+
+    .download-buttons a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: skewX(-30deg);
+      transition: left 0.5s ease;
+      z-index: 0;
+    }
+
+    .download-buttons a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(45deg, #3498db, #2980b9);
+    }
+
+    .download-buttons a:hover::before {
+      left: 100%;
+    }
+
+    .download-buttons a.loading {
+      pointer-events: none;
+      color: transparent;
+    }
+
+    .download-buttons a.loading::after {
+      content: attr(data-countdown);
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      z-index: 2;
+    }
+
+    .download-buttons a.loading::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      right: -6px;
+      bottom: -6px;
+      border-radius: 40px;
+      z-index: 0;
+      background: conic-gradient(#3498db 0%, transparent 0%);
+      animation: spinBorder 10s linear forwards;
+    }
+
+    @keyframes spinBorder {
+      0% {
+        transform: rotate(0deg);
+        background: conic-gradient(#3498db 0%, transparent 0%);
+      }
+      100% {
+        transform: rotate(360deg);
+        background: conic-gradient(#2980b9 0%, transparent 0%);
+      }
+    }
+
+    .social-links {
+      margin-top: auto;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .social-links a {
+      color: white;
+      font-size: 24px;
+      text-decoration: none;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .social-links a:hover {
+      transform: scale(1.2);
+      color: #f1c40f;
+    }
+
+    .password-container {
+      margin-top: 20px;
+      position: relative;
+      display: flex;
       align-items: center;
+      justify-content: center;
     }
 
-    /* التعديلات المميزة على مربعات التحميل */
-    .download-box {
-      background-color: #ffffff;
-      padding: 20px 30px;
-      border-radius: 15px;
-      width: 250px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .password-container input {
+      padding: 14px;
+      font-size: 20px;
+      border: 2px solid #fff;
+      border-radius: 20px;
+      width: 220px;
+      background: white;
+      color: black;
+      text-align: center;
+      transition: all 0.3s ease-in-out;
     }
 
-    .download-box:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    .password-container input:focus {
+      border-color: #f1c40f;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 10px rgba(241, 196, 15, 0.7);
     }
 
-    .download-button {
-      background-color: #007BFF;
+    .eye-icon {
+      position: absolute;
+      right: 15px;
+      cursor: pointer;
+      font-size: 24px;
+      color: red;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .eye-icon.show {
+      color: green;
+    }
+
+    .eye-icon:hover {
+      transform: scale(1.2);
+    }
+
+    .login-button {
+      margin-top: 20px;
+      padding: 14px 30px;
+      background-color: #f1c40f;
       color: white;
       border: none;
-      padding: 12px 25px;
-      border-radius: 10px;
-      font-size: 16px;
+      border-radius: 30px;
+      font-size: 18px;
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      justify-content: center;
-      width: 100%;
+      display: none;
     }
 
-    .download-button:hover {
-      background-color: #0056b3;
-      transform: scale(1.05);
+    .login-button.show {
+      display: block;
     }
 
-    .download-icon {
-      font-size: 22px;
-    }
+    @media (max-width: 600px) {
+      .circle-image {
+        width: 150px;
+        height: 150px;
+      }
 
-    .download-label {
-      margin-top: 10px;
-      font-weight: bold;
-      color: #333;
-      text-align: center;
-    }
+      h1 {
+        font-size: 20px;
+      }
 
-    .image-row {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 30px;
-      flex-wrap: nowrap;
-    }
+      .download-buttons a {
+        font-size: 16px;
+        padding: 12px;
+      }
 
-    .image-card {
-      padding: 5px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px (0, 0, 0, 0.1);
-      width: 100px;
-      height: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      .password-container input {
+        width: 220px;
+      }
     }
-
-    .image-card img {
-      width: 100px;
-      height: 100px;
-      border-radius: 6px;
-      object-fit: cover;
-    }
-
-    .image-card p {
-      margin-top: 8px;
-      font-size: 14px;
-      color: #333;
-      font-weight: bold;
-    }
-
   </style>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
 
-  <div class="marquee-container">
-    <div class="marquee-text">
-      اهلا وسهلا بكم في شركة محمد علي الأتصالات، كل ما يلزمك نوفره لكم - عنوان تواجدنا: ريف حلب الشمالي، صوران اعزاز، مدينة حلب، الشعار، جانب مشفى البيان
-    </div>
+  <img src="https://i.imgur.com/RF0p0LF.png" alt="صورة دائرية" class="circle-image" />
+  <h1>مرحبا بك في مركز تحميل التطبيقات</h1>
+
+  <div class="download-buttons">
+    <a href="#"
+     data-href="https://www.mediafire.com/file/wycxe51o1hrkz76/base.apk/file">تحميل شام كاش</a>
+    <a href="#" data-href="whatsapp.html">تحميل تطبيق واتساب</a>
+    <a href="#" data-href="wa-business.html">تحميل واتساب أعمال</a>
+    <a href="#" data-href="https://www-xix-29.github.io/WhatsApp/">تحميل تطبيق واتساب معدل</a>
+    <a href="#" data-href="instagram.html">تحميل إنستقرام</a>
+    <a href="#" data-href="https://www.mediafire.com/file/g6rrhr256zyqdea/base.apk/file">تحميل تيليجرام</a>
+    <a href="#" data-href="facebook.html">تحميل فيسبوك</a>
+    <a href="#" data-href="messenger.html">تحميل ماسنجر</a>
+    <a href="#" data-href="youtube.html">تحميل يوتيوب</a>
+    <a href="#" data-href="youtube-mod.html">تحميل يوتيوب معدل</a>
   </div>
 
-  <div class="loader-wrapper">
-    <div class="loader"></div>
+  <div class="password-container">
+    <input type="password" id="password" placeholder="أدخل كلمة السر" />
+    <i class="fas fa-eye eye-icon" id="toggle-password"></i>
   </div>
 
-  <div id="main-content">
-    <img src="https://i.imgur.com/dAs6cTe.jpeg" alt="صورة دائرية" class="top-image" />
-    <h1>اهلا وسهلا بكم في موقعنا</h1>
+  <button class="login-button" id="loginButton">دخول</button>
 
-    <div class="download-section">
-      <div class="download-box">
-        <button class="download-button">
-          <span class="download-icon">⬇️</span> تحميل
-        </button>
-        <p class="download-label">وتساب محمد علي</p>
-      </div>
-
-      <div class="download-box">
-        <button class="download-button">
-          <span class="download-icon">⬇️</span> تحميل
-        </button>
-        <p class="download-label">VPN محمد علي</p>
-      </div>
-
-      <div class="download-box">
-        <button class="download-button">
-          <span class="download-icon">⬇️</span> تحميل
-        </button>
-        <p class="download-label">يوتيوب محمد علي</p>
-      </div>
-    </div>
-
-    <!-- مربعات الصور مع العناوين -->
-    <div class="image-row">
-      <div class="image-card">
-        <img src="https://i.imgur.com/nr5D5Xd.png" alt="صيانة">
-        <p>قسم الصيانة</p>
-      </div>
-      <div class="image-card">
-        <img src="https://i.imgur.com/nr5D5Xd.png" alt="سوفتوير">
-        <p>قسم السوفتوير</p>
-      </div>
-      <div class="image-card">
-        <img src="https://i.imgur.com/RUIyhSN.png" alt="أجهزة">
-        <p>قسم الأجهزة</p>
-      </div>
-    </div>
-
+  <div class="social-links">
+    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://t.me" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+    <a href="https://wa.me" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="mailto:example@email.com"><i class="fas fa-envelope"></i></a>
   </div>
 
   <script>
-    window.addEventListener('load', function () {
-      document.querySelector('.loader-wrapper').style.display = 'none';
-      document.getElementById('main-content').style.display = 'block';
+    const buttons = document.querySelectorAll('.download-buttons a');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        if (button.classList.contains('loading')) return;
+
+        let countdown = 10;
+        const targetUrl = button.getAttribute('data-href');
+
+        button.classList.add('loading');
+        button.dataset.countdown = countdown;
+
+        const interval = setInterval(() => {
+          countdown--;
+          button.dataset.countdown = countdown;
+
+          const percent = (10 - countdown) * 10;
+          button.style.background = `linear-gradient(to right, #f1c40f ${percent}%, #16a085 ${percent}%)`;
+
+          if (countdown <= 0) {
+            clearInterval(interval);
+            window.location.href = targetUrl;
+          }
+        }, 1000);
+      });
+    });
+
+    const correctPassword = 'XIX1212X';
+    const togglePassword = document.getElementById('toggle-password');
+    const passwordField = document.getElementById('password');
+    const loginButton = document.getElementById('loginButton');
+
+    passwordField.addEventListener('input', () => {
+      const enteredPassword = passwordField.value;
+      if (enteredPassword === correctPassword) {
+        togglePassword.classList.add('show');
+        loginButton.classList.add('show');
+      } else {
+        togglePassword.classList.remove('show');
+        loginButton.classList.remove('show');
+      }
+    });
+
+    togglePassword.addEventListener('click', () => {
+      const type = passwordField.type === 'password' ? 'text' : 'password';
+      passwordField.type = type;
+      togglePassword.classList.toggle('show');
+    });
+
+    loginButton.addEventListener('click', () => {
+      const enteredPassword = passwordField.value;
+      if (enteredPassword === correctPassword) {
+        window.location.href = 'your_next_page.html';
+      } else {
+        alert("كلمة المرور غير صحيحة");
+      }
     });
   </script>
 
