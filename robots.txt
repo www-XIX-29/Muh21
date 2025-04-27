@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www-xix-29.github.io/Muhammad-Ali/sitemap%20(1).xml
+Sitemap: https://www-xix-29.github.io/Muhammad-Ali/sitemap%20(2).xml
+Sitemap: https://www-xix-29.github.io/Muhammad-Ali/sitemap_4521949.xml
